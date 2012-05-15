@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>joyce.js example</title>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="jquery.joyce.js"></script>
+    <style>
+        body {
+            background: #fff;
+            color: #002244;
+            font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            margin: 20px auto;
+            padding: 0;
+            text-align: left;
+            width: 340px;
+        }
+
+        ::selection {
+            background: #002244;
+            color: #ffde6c;
+        }
+        ::-moz-selection {
+            background: #002244;
+            color: #ffde6c;
+        }
+        ::-webkit-selection {
+            background: #002244;
+            color: #ffde6c;
+        }
+        a, a:visited {
+            color: #00a3c9;
+            display: block;
+            margin: auto;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            background: #ffde6c;
+            border: 1px solid #333;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            text-align: left;
+            width: 300px;
+        }
+        .container > h1 {
+            margin-top: 0;
+            width: auto;
+        }
+        .container > p {
+            margin-bottom: 0;
+        }
+        .one-liner {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;            
+        }
+        .pretty {
+            word-wrap: break-word;
+        }
+        input {
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('#toggle-one-liner').click(function() {
+                $('.pretty h1').toggleClass('one-liner');
+            });
+            $('#refresh').click(function() {
+                window.location.reload();
+                return false;
+            });
+            $('#joyce-container').click(function() {
+                $('.container').joyce({
+                    exclude: 'label'
+                });
+                return false;
+            });
+            $('#joyce-h1').click(function() {
+                $('.container > h1').joyce({
+                    exclude: ''
+                });
+                return false;
+            });
+            $('#joyce-body').click(function() {
+                $('body').joyce({
+                    exclude: 'a,label'
+                });
+                return false;
+            });
+            $('#joyce-p').click(function() {
+                $('p').joyce({
+                    exclude: ''
+                });
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>joyce.js demo</h1>
+    <ul>
+        <li><a href="#" id="refresh">refresh page</a>
+        <li><a href="#" id="joyce-body">run <code>$('body').j<span>o</span>yce();</code></a>
+        <li><a href="#" id="joyce-container">run <code>$('.container').j<span>o</span>yce();</code></a>
+        <li><a href="#" id="joyce-h1">run <code>$('.container > h1').j<span>o</span>yce();</code></a>
+        <li><a href="#" id="joyce-p">run <code>$('p').j<span>o</span>yce();</code></a>
+    </ul>
+    <div class="container ugly">
+        <h1>Hello, world.</h1>
+        <p>
+            This is some sample text. Typically, when developing a layout, you'll use
+            concise text with relatively short words as sample text. But user-
+            submitted contentmmay contain long words, or be more verbose than you
+            anticipated.
+        </p>
+    </div>
+    <div class="container pretty">
+        <h1 class="one-liner">Hello, world.</h1>
+        <label><input type="checkbox" checked id="toggle-one-liner">Toggle <code>text-overflow: ellipsis</code></label>
+        <p>
+            This is some sample text. Typically, when developing a layout, you'll use
+            concise text with relatively short words as sample text. But user-
+            submitted contentmmay contain long words, or be more verbose than you
+            anticipated.
+        </p>
+    </div>
+</body>
+</html>
