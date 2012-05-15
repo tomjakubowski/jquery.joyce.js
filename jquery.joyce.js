@@ -7,16 +7,21 @@ $(document).ready(function() {
     };
     $.fn.joyce = function(options) {
         options = $.extend({
-            exclude: ''
+            exclude: null
         }, options);
-        var filter = ':not(iframe):not(' 
-            + options.exclude + '):not(:descendentof('
-            + options.exclude + '))';
+
+        if (options.exclude)
+            var filter = ':not(iframe):not(' 
+                + options.exclude + '):not(:descendentof('
+                + options.exclude + '))';
+        else
+            var filter = ':not(iframe)';
+
         this.find(filter)
             .andSelf()
             .contents()
             .filter(function() {
-                // 3 is a magic number forNode.TEXT_NODE
+                // 3 is a magic number for Node.TEXT_NODE
                 return this.nodeType == 3 // Node.TEXT_NODE
                        && !/^\s*$/.test(this.textContent);
             })
